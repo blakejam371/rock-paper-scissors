@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Macondo Swash Caps", cursive;
+  color: rgb(77, 77, 77)
+}
+
+body {
+  line-height: 1.5;
+  font-size: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  font-size: 1em;
+  margin: 10px;
+  padding: 20px;
+  width: 150px;
+}
+
+h2, p {
+  margin-bottom: 10px;
+}
+
+#choices {
+  display: flex;
+  align-items: center;
+}
+
+#red-color {
+  color: rgb(218, 97, 137)
+}
+
+#green-color {
+  color: rgb(115, 246, 115);
+}
+
+#blue-color {
+  color: rgb(123, 226, 226);
+}
+
+#roundResult {
+  margin-bottom: 40px;
+}
+
+.reset {
+  visibility: hidden;
+}

@@ -4,10 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <title>Document</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Macondo+Swash+Caps&display=swap" rel="stylesheet">
+  <script src="./rps.js" defer></script>
+  <title>Rock Paper Scissors</title>
 </head>
 <body>
-  <script src="./rps.js"></script>
-  
+  <h2>Rock Paper Scissors</h2>
+  <p>Three Choices  |  First to Five  |  One Winner</p>
+  <p><span id="red-color">Rock</span> beats <span id="blue-color">Scissors</span> | <span id="green-color">Paper</span> beats <span id="red-color">Rock</span> | <span id="blue-color">Scissors</span> beats <span id="green-color">Paper</span></p>
+  <div id="choices">
+    <button class="playerSelection rockButton">Rock</button>
+    <button class="playerSelection paperButton">Paper</button>
+    <button class="playerSelection scissorsButton">Scissors</button>
+  </div>
+  <div id="results"></div>
+    <p id="rounds">Round 0</p>
+    <p id="scores">Your Score: 0 | Enemy Score: 0</p>
+    <p id="roundResult"> </p>
+    <p>Enemy Choice</p>
+    <button id="enemyChoice"> - </button>
+    <h2 id="gameResult"> </h2>
+  <div>
+    <button class="reset">Reset Game</button>
+  </div>
 </body>
 </html>

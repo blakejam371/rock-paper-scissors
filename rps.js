@@ -1,82 +1,126 @@
-// declare options
-const options = ["rock", "paper", "scissors"];
-
-// initialise variable for player input 
-let playerSelection = "";
-
-// initialise scores for player & computer
+// initialise scores, round, and choice variables
 let playerScore = 0; 
 let computerScore = 0;
+let round = 0;
+let playerChoice = '';
+let computerChoice = '';
+const roundCount = document.querySelector('#rounds');
+const scoreCount = document.querySelector('#scores');
+const roundResult = document.querySelector('#roundResult');
+const enemyChoice = document.querySelector('#enemyChoice');
+const gameResult = document.querySelector('#gameResult');
+const resetButton = document.querySelector('.reset');
 
-// create function to randomly get computer choice
-function computerSelection(options) {
-  return options[Math.floor(Math.random() * options.length)];
+// add event listeners to buttons
+const buttons = document.querySelectorAll('.playerSelection');
+  buttons.forEach((element)  => {
+    element.addEventListener('click', () => {
+      if (element.classList.contains('rockButton')) {
+        playerChoice = 'Rock';
+        computerSelection();
+        playRound();
+    } else if (element.classList.contains('paperButton')) {
+        playerChoice = 'Paper';
+        computerSelection();
+        playRound()
+    } else if (element.classList.contains('scissorsButton')) {
+        playerChoice = 'Scissors';
+        computerSelection();
+        playRound()
+    }
+    }
+    )}
+  );
+
+function computerSelection() {
+  const options = ["Rock", "Paper", "Scissors"];
+  computerChoice = options[Math.floor(Math.random() * options.length)];
+  enemyChoice.textContent = computerChoice;
 }
 
 // create a function to play a round of Rock Paper Scissors
-// two inputs player and computer selection
-function playRound(playerSelection, computerSelection) {
-  console.log(`Computer: ${computerSelection}`);
-  console.log(`Player: ${playerSelection}`);
-  if (playerSelection.toLowerCase() === computerSelection) {
-    return("It's a draw")
+function playRound() {
+  if (playerChoice === computerChoice) {
+      roundResult.textContent = "It's a draw";
+      round++;
+      roundCount.textContent = `Round ${round}`;
   } 
-  else if (playerSelection.toLowerCase() === "rock") {
-    if (computerSelection === "paper") {
+  else if (playerChoice === "Rock") {
+    if (computerChoice === "Paper") {
       // increase computer score
+      round++;
+      roundCount.textContent = `Round ${round}`;
       computerScore++;
-      return("You Lose! Paper beats Rock");
+      scoreCount.textContent = `Your Score: ${playerScore} | Enemy Score: ${computerScore}`;
+      roundResult.textContent = "You Lose! Paper beats Rock";
     }
-    else if (computerSelection === "scissors") {
+    else if (computerChoice === "Scissors") {
       // increase player score
+      round++;
+      roundCount.textContent = `Round ${round}`;
       playerScore++;
-      return("You Win, Rock beats Scissors");
+      scoreCount.textContent = `Your Score: ${playerScore} | Enemy Score: ${computerScore}`;
+      roundResult.textContent = "You Win, Rock beats Scissors";
     }
   } 
-  else if (playerSelection.toLowerCase() === "paper") {
-    if (computerSelection === "rock") {
+  else if (playerChoice === "Paper") {
+    if (computerChoice === "Rock") {
+      round++;
+      roundCount.textContent = `Round ${round}`;
       playerScore++;
-      return ("You Win, Paper beats Rock");
+      scoreCount.textContent = `Your Score: ${playerScore} | Enemy Score: ${computerScore}`;
+      roundResult.textContent = "You Win, Paper beats Rock";
     }
-    else if (computerSelection === "scissors") {
+    else if (computerChoice === "Scissors") {
+      round++;
+      roundCount.textContent = `Round ${round}`;
       computerScore++;
-      return("You Lose, Scissors beat Paper");
+      scoreCount.textContent = `Your Score: ${playerScore} | Enemy Score: ${computerScore}`;
+      roundResult.textContent = "You Lose, Scissors beat Paper";
     }
   } 
-  else if (playerSelection.toLowerCase() === "scissors")  {
-    if (computerSelection === "paper") {
+  else if (playerChoice === "Scissors")  {
+    if (computerChoice === "Paper") {
+      round++;
+      roundCount.textContent = `Round ${round}`;
       playerScore++;
-      return("You Win, Scissors beat Paper");
+      scoreCount.textContent = `Your Score: ${playerScore} | Enemy Score: ${computerScore}`;
+      roundResult.textContent = "You Win, Scissors beat Paper";
     }
-    else if (computerSelection === "rock") {
+    else if (computerChoice === "Rock") {
+      round++;
+      roundCount.textContent = `Round ${round}`;
       computerScore++;
-      return("You Lose, Rock beats Scissors");
+      scoreCount.textContent = `Your Score: ${playerScore} | Enemy Score: ${computerScore}`;
+      roundResult.textContent = "You Lose, Rock beats Scissors";
     }
   }
   else {
     return "Invalid result";
   }
+  checkScore();
 }
 
-// create playGame function - loops 'rounds' number of times
-function playGame(rounds) {
-  for (let i = 0; i < rounds; i++) {
-    // get new input from player each round
-    playerSelection = prompt("Enter Rock, Paper, or Scissors:", "")
-    // print result of each round to the console
-    console.log(playRound(playerSelection, computerSelection(options)));
+function checkScore() {
+  if (playerScore === 5) {
+    gameResult.textContent = 'You win the game!';
+    gameResult.style.color = 'rgb(115, 246, 115)';
+    resetGame();
+  } else if (computerScore === 5) {
+    gameResult.textContent = 'You lose the game!';
+    gameResult.style.color = 'rgb(218, 97, 137)';
+    resetGame();
   }
-  // add result messages
-  if (playerScore > computerScore) {
-    return `You win. Player scored ${playerScore} and Computer scored ${computerScore}`;
-  }
-  else if (computerScore > playerScore) {
-    return `You lose. Computer scored ${computerScore} and Player scored ${playerScore}`;
-  }
-  else {
-    return `It's a draw. Player scored ${playerScore} and Computer scored ${computerScore}`;
-  }
-  
 }
-// call play game function and input how many rounds to play
-playGame(5);
+
+function resetGame() {
+  buttons.forEach((element) => {
+    element.disabled = true;
+  });
+
+  resetButton.style.visibility = 'visible';
+  
+  resetButton.addEventListener('click', () => {
+    window.location.reload();
+  });
+};
